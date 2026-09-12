@@ -21,11 +21,12 @@ def get_idle_time_minutes():
     return 0
 
 def main():
-    IDLE_THRESHOLD_MINUTES = 10
-    CHECK_INTERVAL_SECONDS = 60 # Poll every 1 minute
+    IDLE_THRESHOLD_MINUTES = 1
+    CHECK_INTERVAL_SECONDS = 5 # Poll every 5 seconds
     
     while True:
         idle_minutes = get_idle_time_minutes()
+        print(f"Current idle time: {idle_minutes:.2f} minutes")
         
         if idle_minutes >= IDLE_THRESHOLD_MINUTES:
             # Native OS shutdown. AWS detects this and stops compute billing.
