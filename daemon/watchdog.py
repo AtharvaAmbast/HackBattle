@@ -2,6 +2,19 @@ import time
 import subprocess
 from ctypes import Structure, windll, c_uint, sizeof, byref
 
+import urllib.request
+import json
+
+def get_config():
+    try:
+        # Replace with your copied Raw Gist URL
+        url = "https://gist.githubusercontent.com/AtharvaAmbast/6caf14250a3e32a96cd14ee238492e0b/raw/57549f8169990ef3d4b975750528e158d3d51a2e/config.json"
+        with urllib.request.urlopen(url) as response:
+            return json.loads(response.read().decode())
+    except Exception:
+        # Safe fallback if the network drops temporarily
+        return {"timeout_minutes": 10, "enabled": True}
+
 class LASTINPUTINFO(Structure):
     _fields_ = [
         ('cbSize', c_uint),
@@ -21,7 +34,8 @@ def get_idle_time_minutes():
     return 0
 
 def main():
-    IDLE_THRESHOLD_MINUTES = 1
+    config = get_config()
+    IDLE_THRESHOLD_MINUTES = config["timeout_minutes"]
     CHECK_INTERVAL_SECONDS = 5 # Poll every 5 seconds
     
     while True:
