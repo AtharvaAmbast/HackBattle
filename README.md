@@ -485,19 +485,32 @@ BUSINESS_CASE.md — Financial analysis
 AWS_vs_NATIVE.md — True-Idle vs AWS Scheduler comparison
 ---
 ❓ FAQ
-Q: Won't this shutdown while I'm actively working?  
+Q: Won't this shutdown while I'm actively working? 
+
 A: No. We check TWO conditions: SSH connection + CPU < 5%. If you're typing code or in a debugger, you're connected. If you close your laptop, the SSH disconnects and we detect idle.
-Q: How is this different from CloudWatch Alarms on CPU?  
+
+Q: How is this different from CloudWatch Alarms on CPU? 
+
 A: CloudWatch only sees hypervisor-level CPU. When you're reading code or paused in a debugger, CPU = 0%. Our daemon checks both CPU AND SSH state locally—zero false positives.
+
 Q: What if I have a long-running build or deploy?  
+
 A: Builds/deploys keep CPU > 5% AND SSH connection active. The daemon won't interrupt. Only if BOTH are idle for 30+ minutes.
-Q: Can I change the idle threshold?  
+
+Q: Can I change the idle threshold? 
+
 A: Yes. Edit `IDLE_THRESHOLD_SECONDS` in `daemon.py` (default: 1800 = 30 min).
-Q: Is this actually better than AWS Instance Scheduler?  
+
+Q: Is this actually better than AWS Instance Scheduler?
+
 A: For teams with variable schedules: absolutely. AWS Scheduler assumes 9-to-6. Real teams have meetings, lunches, focus blocks. We capture that intra-day idle time. Typical savings: 30-40% MORE than AWS's solution.
+
 Q: What's the SaaS roadmap?  
+
 A: Open-source core → SaaS layer with centralized dashboard → FinOps analytics → Cost optimization AI.
-Q: How much does True-Idle cost?  
+
+Q: How much does True-Idle cost?
+
 A: Open-source version: $0. SaaS version (future): $3-5 per developer/month.
 ---
 🚀 Roadmap
