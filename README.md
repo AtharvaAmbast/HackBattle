@@ -97,21 +97,35 @@ How It Works
 ```
 Key Differentiators
 Factor	AWS Instance Scheduler	True-Idle	Winner
-Activity Detection	Time-based only	OS-level (CPU + SSH)	✅ True-Idle
-False-Positive Risk	HIGH (schedule-based)	ZERO (checks actual activity)	✅ True-Idle
-Infrastructure	Lambda + DynamoDB	Local daemon + CLI	✅ True-Idle
-Setup Complexity	High (stack needed)	Simple (2 files)	✅ True-Idle
-Cost of Tool	$5-10+/month	$0	✅ True-Idle
-Idle Detection	Only at scheduled times	Continuous, real-time	✅ True-Idle
+Activity Detection	Time-based only	OS-level (CPU + SSH)
+
+✅ True-Idle
+False-Positive Risk	HIGH (schedule-based)	ZERO (checks actual activity)
+✅ True-Idle
+Infrastructure	Lambda + DynamoDB	Local daemon + CLI	
+✅ True-Idle
+Setup Complexity	High (stack needed)	Simple (2 files)	
+✅ True-Idle
+Cost of Tool	$5-10+/month	$0	
+✅ True-Idle
+Idle Detection	Only at scheduled times	Continuous, real-time	
+✅ True-Idle
 ---
 ✨ Features
+
 🚀 On-Demand Wake — One command starts instance and SSHes you in
 📊 True-Idle Detection — Monitors SSH + CPU (not just the clock)
+
 🔒 Zero False Positives — Won't shutdown while you're actively working
+
 💰 Proven ROI — Save $200+/month per 50-person team vs AWS
+
 ⚙️ Zero Infrastructure — No Lambda, no DynamoDB, no overhead
+
 📈 Enterprise Ready — Open-source core + SaaS option
+
 🛡️ Security-First — IAM-scoped, graceful shutdown, encrypted heartbeats
+
 ---
 🎯 Financial Case
 For a 50-Person Engineering Team
