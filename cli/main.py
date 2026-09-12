@@ -9,8 +9,8 @@ load_dotenv()
 app = typer.Typer()
 console = Console()
 
-INSTANCE_ID = os.getenv("i-0d13a749f2a1f5fec")
-REGION = os.getenv("us-east-1c")
+INSTANCE_ID = "i-0d13a749f2a1f5fec"
+REGION = "us-east-1"
 
 @app.command()
 def wake():
