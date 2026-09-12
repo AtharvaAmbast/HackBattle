@@ -4,11 +4,15 @@ import json
 import psutil
 import subprocess
 import asyncio
+import warnings
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import uvicorn
 from ctypes import Structure, windll, c_uint, sizeof, byref
+
+warnings.filterwarnings("ignore")
 
 # --- Pythonw Crash Prevention ---
 # Redirects output to a black hole if running without a console
@@ -54,7 +58,13 @@ def get_idle_time_minutes():
     return 0
 
 # --- Web Server Setup ---
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    task = asyncio.create_task(watchdog_daemon())
+    yield
+    task.cancel()
+
+app = FastAPI(lifespan=lifespan)
 
 class SettingsUpdate(BaseModel):
     enabled: bool
@@ -269,9 +279,7 @@ async def watchdog_daemon():
             
         await asyncio.sleep(5)
 
-@app.on_event("startup")
-async def startup_event():
-    asyncio.create_task(watchdog_daemon())
+
 
 if __name__ == "__main__":
     # log_config=None strictly silences all Uvicorn terminal output, preventing pythonw crashes.
