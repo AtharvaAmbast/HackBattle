@@ -3,7 +3,7 @@ True-Idle
 ![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![AWS EC2](https://img.shields.io/badge/cloud-AWS%20EC2-orange.svg)
 [![Hackathon Project](https://img.shields.io/badge/built%20at-hackathon-blueviolet.svg)]()
-> **True idle detection for EC2. Stop wasting $500/month per 50-person team.**  
+
 > Unlike AWS Instance Scheduler, True-Idle detects *actual* developer activity—not the clock.
 ---
 ⚡ The Problem: Why AWS Instance Scheduler Isn't Enough
