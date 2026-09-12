@@ -39,13 +39,16 @@ def main():
     CHECK_INTERVAL_SECONDS = 5 # Poll every 5 seconds
     
     while True:
-        idle_minutes = get_idle_time_minutes()
-        print(f"Current idle time: {idle_minutes:.2f} minutes")
+        config = get_config()
         
-        if idle_minutes >= IDLE_THRESHOLD_MINUTES:
-            # Native OS shutdown. AWS detects this and stops compute billing.
-            subprocess.run(["shutdown", "/s", "/t", "0"])
-            break
+        if config["enabled"]:
+            idle_minutes = get_idle_time_minutes()
+            print(f"Current idle time: {idle_minutes:.2f} minutes")
+        
+            if idle_minutes >= IDLE_THRESHOLD_MINUTES:
+                # Native OS shutdown. AWS detects this and stops compute billing.
+                subprocess.run(["shutdown", "/s", "/t", "0"])
+                break
             
         time.sleep(CHECK_INTERVAL_SECONDS)
 
