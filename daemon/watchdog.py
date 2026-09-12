@@ -282,5 +282,9 @@ async def watchdog_daemon():
 
 
 if __name__ == "__main__":
-    # log_config=None strictly silences all Uvicorn terminal output, preventing pythonw crashes.
-    uvicorn.run("watchdog:app", host="0.0.0.0", port=80, reload=False, log_config=None)
+    if sys.executable.endswith("pythonw.exe"):
+        # Silent mode for background Task Scheduler
+        uvicorn.run("watchdog:app", host="0.0.0.0", port=80, reload=False, log_config=None)
+    else:
+        # Verbose mode for visible terminal debugging
+        uvicorn.run("watchdog:app", host="0.0.0.0", port=80, reload=False)
