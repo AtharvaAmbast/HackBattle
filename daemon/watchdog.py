@@ -21,8 +21,8 @@ def get_idle_time_minutes():
     return 0
 
 def main():
-    IDLE_THRESHOLD_MINUTES = 30
-    CHECK_INTERVAL_SECONDS = 300 # Poll every 5 minutes
+    IDLE_THRESHOLD_MINUTES = 10
+    CHECK_INTERVAL_SECONDS = 60 # Poll every 1 minute
     
     while True:
         idle_minutes = get_idle_time_minutes()
